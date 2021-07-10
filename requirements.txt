@@ -1,0 +1,6 @@
+jupyter
+matplotlib
+streamlit
+scikit-learn
+sktime
+
