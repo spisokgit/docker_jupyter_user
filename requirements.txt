@@ -1,0 +1,12 @@
+numpy
+pandas
+python-dotenv
+entsoe-py
+scikit-learn
+xgboost
+sktime
+streamlit
+jupyter
+matplotlib
+apscheduler
+seaborn
