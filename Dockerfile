@@ -23,26 +23,26 @@ RUN pip install -r requirements.txt
 FROM python:3.7.8-slim-buster AS runtime
 
 # setup user and group ids
-ARG USER=sin
-ARG USER_ID=1000
-ARG GROUP_ID=1000
-ENV USER_ID $USER_ID
-ENV GROUP_ID $GROUP_ID
+# ARG USER=sin
+# ARG USER_ID=1000
+# ARG GROUP_ID=1000
+# ENV USER_ID $USER_ID
+# ENV GROUP_ID $GROUP_ID
 
 # add non-root user and give permissions to workdir
-RUN groupadd --gid $GROUP_ID $USER && \
-          adduser $USER --ingroup $USER --gecos '' --disabled-password --uid $USER_ID && \
-          mkdir -p /usr/src && \
-          chown -R $USER:$USER /usr/src
+# RUN groupadd --gid $GROUP_ID $USER && \
+#           adduser $USER --ingroup $USER --gecos '' --disabled-password --uid $USER_ID && \
+#           mkdir -p /usr/src && \
+#           chown -R $USER:$USER /usr/src
 
 # copy from build image
-COPY --chown=$USER:$USER --from=build /opt/venv /opt/venv
+# COPY --chown=$USER:$USER --from=build /opt/venv /opt/venv
 
 # set working directory
-WORKDIR /usr/src
+# WORKDIR /usr/src
 
 # switch to non-root user
-USER $USER
+# USER $USER
 
 # disables lag in stdout/stderr output
 ENV PYTHONUNBUFFERED 1
