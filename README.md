@@ -3,4 +3,4 @@
 ## run user
 + docker run -it -p 7777:7777 -p 8501:8501 -p 8000:8000 --name ml_jupyter_user -v "$PWD":/usr/src/  ml_jupyter_user
 ## run root
-+ docker run -it -p 7777:7777 -p 8501:8501 -p 8000:8000 --name ml -v "$PWD":/usr/src/  ml_jupyter bash -c "jupyter notebook --notebook-dir=/usr/src --port=7777 --ip=0.0.0.0 --no-browser --allow-root --debug" 
++ docker run -it -p 7777:7777 -p 8501:8501 -p 8000:8000 --name ml -v "$PWD":/usr/src/  ml_jupyter 
