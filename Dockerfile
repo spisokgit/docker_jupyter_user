@@ -5,9 +5,9 @@
 FROM python:3.7.8-slim-buster AS build
 
 # virtualenv
-# ENV VIRTUAL_ENV=/opt/venv
-# RUN python3 -m venv $VIRTUAL_ENV
-# ENV PATH="$VIRTUAL_ENV/bin:$PATH"
+ENV VIRTUAL_ENV=/opt/venv
+RUN python3 -m venv $VIRTUAL_ENV
+ENV PATH="$VIRTUAL_ENV/bin:$PATH"
 ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
 ENV TZ Asia/Seoul
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
@@ -37,18 +37,19 @@ FROM python:3.7.8-slim-buster AS runtime
 
 # copy from build image
 # COPY --chown=$USER:$USER --from=build /opt/venv /opt/venv
+COPY --from=build /opt/venv /opt/venv
 
 # set working directory
-# WORKDIR /usr/src
+WORKDIR /usr/src
 
 # switch to non-root user
 # USER $USER
 
 # disables lag in stdout/stderr output
-# ENV PYTHONUNBUFFERED 1
-# ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
+ENV PYTHONDONTWRITEBYTECODE 1
 # Path
-# ENV PATH="/opt/venv/bin:$PATH"
+ENV PATH="/opt/venv/bin:$PATH"
 
 # Run 
 CMD ["jupyter", "notebook", "--notebook-dir=/usr/src", "--port", "7777", "--ip", "0.0.0.0", "--no-browser", "--allow-root", "--debug"]
